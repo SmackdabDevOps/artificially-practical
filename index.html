@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificially Practical - AI that actually works in the real world</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-blue: #1F6FEB;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #4a4a4a;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --accent: #0a58ca;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: var(--white);
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-blue);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent) 100%);
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .hero-description {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--dark-gray);
+        }
+        
+        /* Philosophy Section */
+        .philosophy {
+            background: var(--light-gray);
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .philosophy-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .philosophy-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        /* Featured Content */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .featured-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .featured-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        
+        .featured-content {
+            padding: 1.5rem;
+        }
+        
+        .featured-content h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+        
+        .featured-content p {
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .read-more {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        /* Newsletter Section */
+        .newsletter {
+            background: var(--dark-gray);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .newsletter h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .philosophy-grid,
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Artificially Practical</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="podcasts.html">Podcasts</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="#" style="color: #ccc;">Software</a></li>
+                <li><a href="#" style="color: #ccc;">About</a></li>
+                <li><a href="#" style="color: #ccc;">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Artificially Practical</h1>
+        <p class="tagline">AI that actually works in the real world.</p>
+        <p class="hero-description">
+            I'm Brooks Swift, and I believe AI should amplify human ability, not replace it. 
+            After years of building software and working with AI daily, I've learned that success 
+            comes from understanding what AI really is—a guessing agent that needs proper guardrails—and 
+            using it to do what it does best while humans do what only we can do.
+        </p>
+        <div class="cta-buttons">
+            <a href="blog.html" class="btn btn-primary">Read the Blog</a>
+            <a href="podcasts.html" class="btn btn-secondary">Listen to Podcasts</a>
+        </div>
+    </section>
+
+    <section class="philosophy">
+        <div class="container">
+            <h2 class="section-title">The Artificially Practical Philosophy</h2>
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <h3>🎯 Context is King</h3>
+                    <p>AI is like a genius old man who knows everything until he doesn't. Without proper context and guardrails, 
+                    it will wander off and buy Diet Pepsi when you sent it for milk. Learn to provide the right context, 
+                    and AI becomes powerful.</p>
+                </div>
+                <div class="philosophy-card">
+                    <h3>🤝 Amplify, Don't Replace</h3>
+                    <p>We're not here to eliminate jobs. We believe people do best what only people can do—build relationships, 
+                    create connections, and solve complex problems. AI should handle the busy work so humans can focus on being human.</p>
+                </div>
+                <div class="philosophy-card">
+                    <h3>🔧 Practical Over Hype</h3>
+                    <p>Forget the marketing promises. I'll tell you what actually works, what doesn't, and why AI screws up 
+                    90% of what I ask it to do. But that 10%? That's where the magic happens when you know how to use it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Featured Content</h2>
+        <div class="featured-grid">
+            <div class="featured-card">
+                <div class="featured-header">Latest Blog Post</div>
+                <div class="featured-content">
+                    <h3>Creating Your Personal AI Profile</h3>
+                    <p>The single most important thing you can do to make AI useful? Spend half a day creating 
+                    a comprehensive "About Me" document. Here's exactly how to do it...</p>
+                    <a href="blog.html" class="read-more">Read more →</a>
+                </div>
+            </div>
+            <div class="featured-card">
+                <div class="featured-header">Recent Podcast</div>
+                <div class="featured-content">
+                    <h3>Why AI is a Terrible Restaurant Booker</h3>
+                    <p>Could AI book you a restaurant tonight? Technically yes. Should you trust it to? 
+                    Absolutely not. Let's talk about why context matters and when AI actually saves time...</p>
+                    <a href="podcasts.html" class="read-more">Listen now →</a>
+                </div>
+            </div>
+            <div class="featured-card">
+                <div class="featured-header">Tool Spotlight</div>
+                <div class="featured-content">
+                    <h3>SmackDab: AI-Powered CRM Done Right</h3>
+                    <p>We built SmackDab to prove AI can enhance human connection, not replace it. 
+                    See how we use AI to amplify your team's ability to build relationships...</p>
+                    <a href="https://smackdab.ai" class="read-more" target="_blank">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h2>Stay Practically Informed</h2>
+        <p>Get weekly insights on using AI effectively without the hype.</p>
+        <a href="mailto:brooks@artificiallypractical.com" class="btn btn-primary">Get in Touch</a>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+        <p>&copy; 2025 Artificially Practical. All rights reserved.</p>
+    </footer>
+</body>
+</html>
